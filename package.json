@@ -1,0 +1,81 @@
+{
+  "name": "x-router-vuejs-example",
+  "version": "0.0.0",
+  "description": "x-router-vuejs-example",
+  "author": "joje",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/attrs/x-router-vuejs-example"
+  },
+  "main": "public/src/index.js",
+  "scripts": {
+    "start": "wpm up docs -d docs/index.html",
+    "dev": "webpack-dev-server --inline --compress --port 9000 --config build/webpack.dev.config.js",
+    "dist:dev": "webpack --config build/webpack.dev.config.js",
+    "dist:prod": "webpack --config build/webpack.dist.config.js",
+    "dist:css": "gulp css --gulpfile build/gulpfile.js",
+    "dist:copy": "gulp copy --gulpfile build/gulpfile.js",
+    "dist": "npm run dist:prod && npm run dist:css && npm run dist:copy",
+    "lint": "eslint --fix --ext .js,.vue public/src",
+    "prepublish": "npm run dist"
+  },
+  "dependencies": {
+    "x-router": "^0.5.20"
+  },
+  "peerDependencies": {
+    "vue": "2.x"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es5-property-mutators": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "compression-webpack-plugin": "^1.1.10",
+    "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^1.1.11",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "fs-extra": "^5.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-clean-css": "^3.9.3",
+    "gulp-css-inline-images": "^0.1.1",
+    "gulp-csso": "^3.0.1",
+    "gulp-less": "^4.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gutil": "^1.6.4",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.0.6",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.6",
+    "style-loader": "^0.20.2",
+    "url-loader": "^1.0.1",
+    "vue": "^2.5.16",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^14.2.1",
+    "vue-router": "^3.0.1",
+    "vue-style-loader": "^4.0.2",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1",
+    "webpack-merge": "^3.0.0"
+  },
+  "files": [
+    "docs",
+    "public"
+  ]
+}

@@ -1,0 +1,7 @@
+<div class="page">
+  <h1 v-if="loaded">Sub Page</h1>
+  <p v-if="loaded">This is sub page</p>
+  <p v-if="visible">Show</p>
+  
+  <x-button @click="toggleshow">{{ message }}</x-button>
+</div>
