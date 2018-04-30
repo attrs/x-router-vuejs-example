@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/attrs/x-router-vuejs-example"
   },
-  "main": "public/src/index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "wpm up docs -d docs/index.html",
     "dev": "webpack-dev-server --inline --compress --port 9000 --config build/webpack.dev.config.js",

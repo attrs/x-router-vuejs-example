@@ -7,7 +7,7 @@ const base = require('./webpack.base.config.js');
 
 module.exports = merge(base, {
   entry: {
-    style: path.join(__dirname, '../public/less/index.less')
+    style: path.join(__dirname, '../less/index.less')
   },
   output: {
     path: path.join(__dirname, '../public/dist'),

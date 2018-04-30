@@ -11,7 +11,7 @@ const autoprefixer = require('gulp-autoprefixer');
 
 const src = path.resolve(__dirname, '../public');
 const dist = path.resolve(__dirname, '../docs');
-const lessroot = path.resolve(src, 'less');
+const lessroot = path.resolve(__dirname, '../less');
 
 // css tasks
 gulp.task('css.less', () => {

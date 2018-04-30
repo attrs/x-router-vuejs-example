@@ -5,7 +5,7 @@ const pkg = require('../package.json');
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, '../public/src'),
+    app: path.join(__dirname, '../src'),
     libs: ['x-router']
   },
   module: {
