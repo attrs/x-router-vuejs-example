@@ -17,7 +17,7 @@
     "dist:css": "gulp css --gulpfile build/gulpfile.js",
     "dist:copy": "gulp copy --gulpfile build/gulpfile.js",
     "dist": "npm run dist:prod && npm run dist:css && npm run dist:copy",
-    "lint": "eslint --fix --ext .js,.vue public/src",
+    "lint": "eslint --fix --ext .js,.vue .html src/* build/*; exit 0",
     "prepublish": "npm run dist"
   },
   "dependencies": {
@@ -44,6 +44,8 @@
     "babel-runtime": "^6.26.0",
     "compression-webpack-plugin": "^1.1.10",
     "css-loader": "^0.28.10",
+    "eslint": "^4.19.1",
+    "eslint-plugin-vue": "^4.5.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.6.1",
