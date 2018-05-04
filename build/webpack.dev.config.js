@@ -5,28 +5,30 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const base = require('./webpack.base.config.js');
 
+const asset = path.resolve(__dirname, '../asset');
+const dist = path.resolve(__dirname, '../dist/web');
+
 module.exports = merge(base, {
-  entry: {
-    style: path.join(__dirname, '../less/index.less')
-  },
   output: {
-    path: path.join(__dirname, '../public/dist'),
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js'
+    path: path.resolve(dist, 'js'),
+    publicPath: '/js',
+    filename: '[name].js'
   },
   devServer: {
-    contentBase: [path.join(__dirname, "../public/dist/"), path.join(__dirname, "../public")],
+    contentBase: [
+      dist,
+      asset
+    ],
     historyApiFallback: true
   },
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ name: 'libs', filename: 'libs.js' }),
     new FriendlyErrorsPlugin(),
     new HtmlWebpackPlugin({
-      title: 'vuejs-practice',
       inject: 'head',
-      filename: path.join(__dirname, '../public/dist/index.html'),
-      template: path.join(__dirname, '../public/index.html')
+      filename: path.resolve(dist, 'index.html'),
+      template: path.resolve(asset, 'index.html')
     })
   ]
 });

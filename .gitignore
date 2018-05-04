@@ -14,4 +14,4 @@ logs
 results
 
 node_modules
-.webmodulesrc
+dist

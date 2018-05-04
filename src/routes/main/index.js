@@ -2,10 +2,10 @@ import Vue from 'vue';
 import template from './main.html';
 
 export default function(req, res, next) {
-  res.render.html(template, function(err, target) {
+  res.render.html(template, (err, target) => {
     if( err ) return next(err);
     
-    var scope = new Vue({
+    const scope = new Vue({
       el: target,
       data: {
         visible: false,
@@ -13,21 +13,21 @@ export default function(req, res, next) {
         total: 0,
         loaded: false
       },
+      mounted() {
+        this.message = 'mounted';
+        this.refresh();
+      },
       methods: {
-        refresh: function () {
+        refresh () {
           this.message = 'loaded';
           this.total = 30;
           this.loaded = true;
         },
-        toggleshow: function() {
+        toggleshow() {
           this.visible = !this.visible;
         }
       },
-      mounted() {
-        this.message = 'mounted';
-        this.refresh();
-      }
     });
     
   }).end();
-};
+}

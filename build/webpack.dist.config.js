@@ -3,19 +3,22 @@ const fs = require('fs-extra');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const base = require('./webpack.base.config.js');
 
 process.env.NODE_ENV = 'production';
 
+const asset = path.resolve(__dirname, '../asset');
+const dist = path.resolve(__dirname, '../docs');
+
 // empty output dir
-fs.emptyDirSync(path.join(__dirname, '../docs'));
+fs.emptyDirSync(dist);
 
 module.exports = merge(base, {
   output: {
-    path: path.join(__dirname, '../docs/js'),
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js'
+    path: path.resolve(dist, 'js'),
+    publicPath: '/js',
+    filename: '[name].js'
   },
   resolve: {
     alias: {
@@ -42,8 +45,11 @@ module.exports = merge(base, {
     new HtmlWebpackPlugin({
       title: 'vuejs-practice',
       inject: 'head',
-      filename: path.join(__dirname, '../docs/index.html'),
-      template: path.join(__dirname, '../public/index.dist.html')
-    })
+      filename: path.join(dist, 'index.html'),
+      template: path.join(asset, 'index.html')
+    }),
+    new CopyWebpackPlugin([
+      { from: path.join(asset, 'favicon.png'), to: dist }
+    ])
   ]
 });

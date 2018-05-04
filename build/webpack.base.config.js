@@ -1,12 +1,23 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanCSSPlugin = require('less-plugin-clean-css');
 const pkg = require('../package.json');
 
+const src = path.resolve(__dirname, '../src');
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, '../src'),
+    app: [src, path.resolve(src, 'less')],
     libs: ['x-router']
+  },
+  node: {
+    __dirname: true,
+    __filename: true,
+    dns: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   },
   module: {
     rules: [
@@ -51,7 +62,9 @@ module.exports = {
         options: {
           sourceMap: true,
         },
-        exclude: /node_modules/
+        include: [
+          src
+        ]
       }, {
         test: /\.css$/,
         loaders: [
@@ -69,26 +82,31 @@ module.exports = {
         ]
       }, {
         test: /\.less$/,
-        loaders: [
-          {
-            loader: 'style-loader',
-            options: {
-              sourceMap: true,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: true,
+                sourceMap: true,
+              }
+            },  {
+              loader: 'less-loader',
+              options: {
+                sourceMap: true,
+                plugins: [
+                  new CleanCSSPlugin({
+                    advanced: true,
+                    compatibility: '*'
+                  })
+                ]
+              }
+            }, {
+              loader: 'autoprefixer-loader'
             }
-          }, {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            }
-          },  {
-            loader: 'less-loader',
-            options: {
-              sourceMap: true,
-            }
-          }, {
-            loader: 'autoprefixer-loader'
-          }
-        ]
+          ]
+        })
       }, {
         test: /\.(jpg|png|woff|woff2|gif|eot|ttf|svg)\??.*$/,
         loader: 'url-loader?limit=16384'
@@ -100,14 +118,19 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.less'],
+    mainFields: ['browser', 'main'],
     alias: {
       vue: 'vue/dist/vue.js'
     }
   },
   plugins: [
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    new ExtractTextPlugin({
+      allChunks: true,
+      filename: '[name].css'
+    }),
     new webpack.DefinePlugin({
       'process.env.VERSION': JSON.stringify(pkg.version)
-    })
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ]
 };

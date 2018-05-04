@@ -2,33 +2,26 @@
   "presets": [
     [
       "env", {
-        "loose": false,
-        "modules": "commonjs",
-        "spec": true,
+        "module": false,
         "targets": {
           "browsers": [
-            "last 3 Chrome versions",
-            "last 3 Firefox versions",
-            "Safari >= 10",
+            "last 2 versions",
+            "Safari >= 7",
             "Explorer >= 11",
-            "Edge >= 12",
-            "iOS >= 10",
-            "Android >= 6"
+            "iOS >= 9",
+            "Android >= 4"
           ]
         },
-        "useBuiltIns": "usage",
-        "debug": false
+        "debug": true
       }
-    ],
-    "stage-3"
+    ]
   ],
   "plugins": [
-      "dynamic-import-node",
-      "transform-class-properties",
-      "transform-es5-property-mutators",
-      "transform-object-rest-spread",
-      "transform-runtime",
-      "transform-vue-jsx"
-  ],
-  "comments": false
+    [
+      "transform-runtime", {
+        "polyfill": true,
+        "regenerator": true
+      }
+    ]
+  ]
 }

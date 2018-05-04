@@ -6,6 +6,6 @@ Vue.component('x-button', Button);
 Vue.component('x-icon', Icon);
 
 export default {
-  Button: Button,
-  Icon: Icon
+  Button,
+  Icon
 };
